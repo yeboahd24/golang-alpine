@@ -1,0 +1,83 @@
+{{ define "layout.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Title }} - Authentication System</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        input {
+            @apply appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="text-xl font-bold text-primary">Auth System</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/dashboard" class="text-gray-600 hover:text-primary">Dashboard</a>
+                    <button onclick="logout()" class="text-gray-600 hover:text-primary">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        {{ if eq .Content "dashboard" }}
+            {{ template "dashboard" . }}
+        {{ else if eq .Content "register" }}
+            {{ template "register" . }}
+        {{ else if eq .Content "login" }}
+            {{ template "login" . }}
+        {{ else }}
+            {{ template "home" . }}
+        {{ end }}
+    </main>
+
+    <footer class="bg-white shadow-lg mt-auto py-4">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2025 Authentication System. All rights reserved(Dominic).</p>
+        </div>
+    </footer>
+
+    <script>
+    function logout() {
+        // Clear localStorage
+        localStorage.clear();
+        
+        // Clear the auth cookie
+        document.cookie = 'token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        
+        // Add a small delay to ensure cookie and localStorage are cleared
+        setTimeout(() => {
+            // Redirect to login page with a message
+            window.location.href = '/login?logged_out=true';
+        }, 100);
+    }
+    </script>
+</body>
+</html>
+{{ end }}

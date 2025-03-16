@@ -1,0 +1,45 @@
+{{ define "dashboard" }}
+<div x-data="dashboard" class="container mx-auto px-4 py-8">
+    <!-- Welcome Section -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Welcome back, <span x-text="username" class="text-primary"></span>!</h1>
+                <p class="text-gray-600 mt-1">Here's an overview of your account</p>
+            </div>
+            <div class="bg-primary/10 rounded-full p-4">
+                <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold mb-4">Profile Information</h2>
+            <div class="space-y-2">
+                <p class="text-gray-600">Username: <span x-text="username" class="text-gray-800"></span></p>
+                <!-- Add more profile information as needed -->
+            </div>
+        </div>
+        
+        <!-- Add more dashboard widgets as needed -->
+    </div>
+</div>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('dashboard', () => ({
+        username: localStorage.getItem('username') || 'User',
+        init() {
+            // The server-side middleware will handle authentication
+            if (!localStorage.getItem('username')) {
+                window.location.href = '/login';
+            }
+        }
+    }));
+});
+</script>
+{{ end }}

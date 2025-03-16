@@ -1,0 +1,21 @@
+database:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: mesika
+  name: auth-db
+  sslmode: disable
+  max_open_conns: 25
+  max_idle_conns: 25
+  conn_max_lifetime: 5m
+
+jwt:
+  secret_key: "h#8oi!k7)6f885=k0qcogdutwm!$ab^tko3mta1jvr@l(-#+x!"
+  token_duration: "24h"
+
+email:
+  host: "sandbox.smtp.mailtrap.io"
+  port: 587
+  username: ""
+  password: ""
+  from: "dominic@gmail.com"
