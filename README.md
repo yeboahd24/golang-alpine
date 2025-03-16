@@ -156,5 +156,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👤 Author
 
 Dominic Yeboah
-- LinkedIn: [Your LinkedIn]
-- GitHub: [Your GitHub]
+- LinkedIn: https://www.linkedin.com/in/dominic-yeboah/
+- GitHub: https://github.com/yeboahd24
